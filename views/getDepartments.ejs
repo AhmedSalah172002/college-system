@@ -1,0 +1,70 @@
+<%- include('parts/head')%> <%- include('parts/navbar')%>
+
+
+
+<% 
+  let  deleteSuccessfully ,deleteFailed;
+  if(deleteDept){ 
+    deptDeletedSuccessfully = (deleteDept.includes('تم')) || false
+    // deleteFailed = (deleteDept.contains('خطأ')) || false
+  }
+%>
+
+
+
+<div class="users">
+    <div class="container">
+   
+      <% if(deptAddedSuccessfully){ %>
+        <div class="position-relative alert alert-success text-center fs-5 bold">
+            <%= deptAddedSuccessfully %>
+            <div class="close">X</div>
+        </div>
+        <% } %>
+
+        
+
+        <% if(deleteDept){ %>
+          <div class="position-relative alert <% if(deptDeletedSuccessfully){ %> alert-success <% }else{ %> alert-danger <% } %> text-center fs-5 bold">
+              <%= deleteDept %>
+              <div class="close">X</div>
+          </div>
+        <% } %>
+
+        <div class="user mb-5">
+            <h1 class="mb-3" style="color: white;">الأقسام :</h1>
+            <table class="table table-striped table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Dept_Name</th>
+                    <th scope="col">Dept_Code</th>
+                    <th scope="col">Settings</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <%  for (let i = 0; i < items.length; i++) {  %>
+                        <tr>
+                            <th scope="row"><%= i+1 %></th>
+                            <form class="delete-form" method="POST">
+                            <td><%= items[i].deptName %></td>
+                            <td><%= items[i].deptCode %></td>
+                            <td>
+                              <input type="hidden" name="deptId" value="<%= items[i]._id %>">
+                              <a
+                              class="my-btn-"
+                              href="/departments/<%= items[i]._id %>">
+                              تعديل
+                              </a>
+                              <input type="submit" class="delete" value="حذف"  formaction="/getDepartments/delete">
+                            </td>
+                          </form>
+                          </tr>
+                    <% } %>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+<%- include('parts/footer')%>

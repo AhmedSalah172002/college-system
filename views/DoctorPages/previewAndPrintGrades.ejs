@@ -1,0 +1,61 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%>
+
+<div class="students-doctor mt">
+  <table class="table bg-light pt-3">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">الاسم</th>
+        <th scope="col">الاكاديمى</th>
+        <th scope="col">
+          الدرجه
+        </th>
+        <th scope="col">
+          التقيم
+        </th>
+        <th scope="col">
+          حالة الطالب
+        </th>
+        <th scope="col">
+            <button class="print-btn A-Btn text-light"> طباعه </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if(students && students.length){ %>
+         <% students.map((student, index) => { %>
+
+            <%
+               let grade = student.grades[subName].grade || 'غير معروف';
+               let rate = student.grades[subName].rate || 'غير معروف';
+               let status = student.grades[subName].status || 'غير معروف';
+            %>
+            
+            <tr>
+               <th scope="row"> <%= index+1 %> </th>
+               <td><%= student.name %></td>
+               <td><%= student.accademic %></td>
+               <td>
+                  <% if(grade){ %>
+                     <%= grade %>
+                  <% } %>
+               </td>
+               <td>
+                     <% if(rate){ %>
+                        <%= rate %>
+                     <% } %>
+               </td>
+               <td>
+                  <% if(status){ %>
+                     <%= status %>
+                  <% } %>
+               </td>
+             </tr>
+         <% })} %>  
+
+    </tbody>
+  </table>
+</div>
+
+
+<%- include('../parts/footer')%>

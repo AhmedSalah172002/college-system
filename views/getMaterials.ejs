@@ -1,0 +1,71 @@
+<%- include('parts/head')%> <%- include('parts/navbar')%>
+
+
+<div class="users">
+    <div class="container">
+
+      
+      <% if(subAddedSuccessfully){ %>
+        <div class="position-relative alert alert-success text-center fs-5 bold">
+            <%= subAddedSuccessfully %>
+            <div class="close">X</div>
+        </div>
+        <% } %>
+      <% if(deleteSub){ %>
+        <div class="position-relative alert alert-light text-danger text-center fs-5 bold">
+            <%= deleteSub %>
+            <div class="close">X</div>
+        </div>
+        <% } %>
+
+            <div class="user ">
+                <h1 class="mb-3" style="color: white;">المواد الدراسية :</h1>
+                <table class="table table-striped table-dark">
+                  
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Subject_Name</th>
+                        <th scope="col">Subject_Code</th>
+                        <th scope="col">Subject_Doc</th>
+                        <th scope="col">Subject_Dept</th>
+                        <th scope="col">Subject_Prev</th>
+                        <th scope="col">Settings</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                        <%
+                          for (let i = 0; i < subjects.length; i++) {  %>
+                            
+                            <tr>
+                                <th scope="row"><%= i+1 %></th>
+                                <form class="delete-form" method="POST">
+                                <td><%= subjects[i].subName %></td>
+                                <td><%= subjects[i].subCode %></td>
+                                <td><%= subjects[i].subDoc %></td>
+                                <td><%= subjects[i].deptName %></td>
+                                <td><%= subjects[i].subPrev %></td>
+                                
+                                <td>
+                                  <input type="hidden" name="subId" value="<%= subjects[i]._id %>">
+                                  <a
+                                  class="my-btn-"
+                                  href="/materials/<%= subjects[i]._id %>">
+                                  تعديل
+                                  </a>
+                                  <input type="submit" class="delete" value="حذف"  formaction="/getMaterials/delete">
+                                </td>
+                              </form>
+                              </tr>
+                        <% } %>
+                      
+                    </tbody>
+                  </table>
+            </div>
+        
+    </div>
+</div>
+
+<%- include('parts/footer')%>

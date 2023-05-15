@@ -1,0 +1,60 @@
+<%- include('../parts/head')%>
+<%- include('../parts/navbar')%>
+
+
+
+<%
+  let deptName, deptCode, notValid = 'not-valid';
+  if(validationErrs && validationErrs.length){ 
+    deptName = validationErrs.find(err => err.param =='deptName');
+    deptCode = validationErrs.find(err => err.param =='deptCode');
+  }; 
+%>
+
+
+<div class="login-container">
+
+  <% if(deptAddErr){%>
+      <script type="text/javascript">
+        
+        $(document).ready(function () {
+          Swal.fire({
+          icon: 'error',
+          title: 'خطأ...',
+          text: '<%= deptAddErr %>',
+          
+          });
+      })
+      </script>
+      <% }; %>
+  
+
+	<form method="post" class="form-login">
+		<ul class="login-nav">
+			<li class="login-nav__item">
+				<h1 >تعديل القسم </h1>
+			</li>
+		</ul>
+    <label class="login__label" for="deptName">اسم القسم :</label>
+    <input value="<%= items[0].deptName %>" class="login__input <% if(deptName){ %> <%= notValid %> <% } %>" type="text" id="deptName" name="deptName" placeholder="اسم القسم "  />
+    <% if(deptName){ %>
+      <div class="invalid-feedback d-flex">
+        <%= deptName.msg %>
+      </div> 
+    <% } %>
+    <label class="login__label" for="deptCode">كود القسم :</label>
+    <input value="<%= items[0].deptCode %>" class="login__input <% if(deptCode){ %> <%= notValid %> <% } %>" type="text" id="deptCode" name="deptCode" placeholder="كود القسم"  />
+    <% if(deptCode){ %>
+      <div class="invalid-feedback d-flex">
+        <%= deptCode.msg %>
+      </div> 
+    <% } %>
+    <div class="btns d-flex justify-content-center mt-5">
+      <button class="add ms-4" formaction="/departments/<%= deptId %>">  تعديل </button>
+    </div>
+	</form>
+</div>
+
+
+
+<%- include('../parts/footer')%>

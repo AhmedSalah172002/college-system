@@ -1,0 +1,36 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    document.querySelectorAll("a").forEach((e)=>{
+        e.onclick=(function () {
+            Swal.fire({
+              title: 'برجاء الإنتظار',
+              html: ' <b></b>',
+              
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                  b.textContent = Swal.getTimerLeft()
+                }, 100)
+              },
+              willClose: () => {
+                clearInterval(timerInterval)
+              }
+            }).then((result) => {
+              /* Read more about handling dismissals below */
+              if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+              }
+            })
+                  
+                })
+    })
+  </script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/functions.js"></script>
+</body>
+</html>

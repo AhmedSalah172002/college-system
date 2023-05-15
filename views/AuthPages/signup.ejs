@@ -1,0 +1,110 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%>
+
+
+<!-- start handle error -->
+
+<%
+let usernameErr, passwordErr, typeErr, notValid = 'not-valid';
+ if(validationErrs && validationErrs.length){ 
+  usernameErr = validationErrs.find(err => err.param =='username');
+  passwordErr = validationErrs.find(err => err.param =='password');
+  typeErr = validationErrs.find(err => err.param =='type');
+}; %>
+
+<!-- end handle error -->
+
+
+
+<div class="login-container">
+
+  <% if(authErr){%>
+    <script type="text/javascript">
+      
+      $(document).ready(function () {
+        Swal.fire({
+        icon: 'error',
+        title: 'خطأ....',
+        text: '<%= authErr %>',
+        });
+    })
+    </script>
+    <% }; %>
+
+
+	<form method="post" action="/signup" class="form-login">
+		<ul class="login-nav">
+			<li class="login-nav__item">
+				<h1 >اضافة مستخدم جديد</h1>
+			</li>
+		</ul>
+    
+      <label class="login__label"  for="name">اسم المستخدم :</label>
+     <input class="login__input  <% if(usernameErr){ %> <%= notValid %> <% } %> "  type="text" name="username" id="name" placeholder="ادخل الاسم" />
+     <% if(usernameErr){ %>
+      <div class="invalid-feedback d-flex">
+        <%= usernameErr.msg %>
+      </div> 
+    <% } %>
+
+    <select id="student" name="type" class="login__input mt-5 mb-3  <% if(typeErr){ %> <%= notValid %> <% } %> " >
+      <option disabled selected>حدد الاختيار المناسب</option>
+          <option class="login__input" value="admin">أدمن</option>
+          <option class="login__input" value="doctor">دكتور</option>
+          <option class="login__input" value="student">طالب</option>
+    </select>
+    <% if(typeErr){ %>
+      <div class="invalid-feedback d-flex">
+        <%= typeErr.msg %>
+      </div> 
+    <% } %>
+
+    <div class=" accademic hide mb-3">
+      <label class="login__label"  for="exampleInputNumber1">الرقم الأكاديمي</label>
+      <input
+        type="number"
+        min="0"
+        name="accademic"
+        class="login__input "
+        id="exampleInputNumber1"
+        placeholder="ادخل الرقم الأكاديمي"
+        value="0"
+      />
+
+    </div>
+    <div class=" prev-subjects hide mb-4">
+      <label class="login__label"  for="exampleInputText2">المواد التي تم اجتيازها</label>
+      <input
+        type="text"
+        name="prevSub"
+        class="login__input"
+        id="exampleInputText2"
+        placeholder="ادخل المواد "
+        value="لايوجد"
+      />
+      <small  style="color: white;"> افصل بين المواد بتلك العلامة ","</small>
+    </div>
+
+      <label class="login__label"  for="exampleInputPassword1">كلمة السر</label>
+      <input
+        
+        type="password"
+        name="password"
+        class="login__input <% if(passwordErr){ %> <%= notValid %> <% } %> "
+        id="exampleInputPassword1"
+        placeholder="ادخل كلمة السر"
+      />
+      <% if(passwordErr){ %>
+        <div class="invalid-feedback d-flex">
+          <%= passwordErr.msg %>
+        </div> 
+      <% } %>
+      <div class="form-check mt-3 form-switch">
+        <input style="float: right;" class="form-check-input ms-3" type="checkbox" id="flexSwitchCheckDefault">
+        <label style="color: white;" class="form-check-label" for="flexSwitchCheckDefault">إنشاء كلمة سر عشوائية</label>
+      </div>
+
+    <button type="submit" class="btn  btn-primary ">اضافة</button>
+	</form>
+</div>
+
+<%- include('../parts/footer')%>

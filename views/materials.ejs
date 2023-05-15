@@ -1,0 +1,87 @@
+
+<%- include('parts/head')%> <%- include('parts/navbar')%>
+
+<%
+  let subName, subCode, subDoc, deptName, subPrev, notValid = 'not-valid';
+  if(validationErrs && validationErrs.length){ 
+    subName = validationErrs.find(err => err.param =='subName');
+    subCode = validationErrs.find(err => err.param =='subCode');
+    subDoc = validationErrs.find(err => err.param =='subDoc');
+    deptName = validationErrs.find(err => err.param =='deptName');
+    subPrev = validationErrs.find(err => err.param =='subPrev');
+  }; 
+%>
+
+
+<div class="login-container">
+  <% if(postSubErr){%>
+    <script type="text/javascript">
+        
+      $(document).ready(function () {
+        Swal.fire({
+        icon: 'error',
+        title: 'خطأ...',
+        text: '<%= postSubErr %>',
+        
+        });
+    })
+    </script>
+    <% }; %>
+	<form method="post" class="form-login">
+		<ul class="login-nav">
+			<li class="login-nav__item">
+				<h1 >اضافة مادة دراسية </h1>
+			</li>
+		</ul>
+    <label class="login__label" for="subName">اسم المادة :</label>
+    <input class="login__input <% if(subName){ %> <%= notValid %> <% } %> " type="text" id="subName" name="subName" placeholder="اسم المادة  "  />
+    <% if(subName){ %>
+      <div class="invalid-feedback d-flex">
+        <%= subName.msg %>
+      </div> 
+    <% } %>
+
+    <label class="login__label" for="subCode">كود المادة :</label>
+    <input class="login__input <% if(subCode){ %> <%= notValid %> <% } %>" type="text" id="subCode" name="subCode" placeholder="كود المادة"  />
+    <% if(subCode){ %>
+      <div class="invalid-feedback d-flex">
+        <%= subCode.msg %>
+      </div> 
+    <% } %>
+
+    <label class="login__label" for="subDoc">اسم الدكتور :</label>
+    <input class="login__input <% if(subDoc){ %> <%= notValid %> <% } %>" type="text" id="subDoc" name="subDoc" placeholder="اسم الدكتور "  />
+    <% if(subDoc){ %>
+      <div class="invalid-feedback d-flex">
+        <%= subDoc.msg %>
+      </div> 
+    <% } %>
+
+    <select name="deptName" class="login__input mt-5 mb-2 <% if(deptName){ %> <%= notValid %> <% } %>" >
+        <option disabled selected>اختر القسم المناسب</option>
+        <% items.map((item)=>{ %>
+            <option  class="login__input" value="<%= item.deptName %>"><%= item.deptName %></option>
+        <% }) %>
+    </select>
+  <% if(deptName){ %>
+      <div class="invalid-feedback d-flex">
+        <%= deptName.msg %>
+      </div> 
+    <% } %>
+
+    <label class="login__label" for="subPrev" >المتطلب السابق :</label>
+    <input value="لايوجد" class="login__input <% if(subPrev){ %> <%= notValid %> <% } %>" type="text" id="subPrev" name="subPrev" placeholder="المتطلب السابق"  />
+    <small  style="color: white;"> افصل بين المواد بتلك العلامة ","</small>
+    <% if(subPrev){ %>
+      <div class="invalid-feedback d-flex">
+        <%= subPrev.msg %>
+      </div> 
+    <% } %>
+
+    
+    <div class="btns d-flex justify-content-center mt-5">
+        <button class="add ms-4" formaction="/materials">  اضافة </button>
+    </div>
+	</form>
+</div>
+<%- include('parts/footer')%>

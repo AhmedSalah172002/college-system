@@ -1,0 +1,189 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%> 
+<% let deleteStatus, editUserStates; 
+if(deleteUser){ 
+  deleteStatus =
+(deleteUser.includes('تم')) || false } 
+if(editStatus){
+   editUserStates = (editStatus.includes('تم')) || false } 
+%>
+
+<div class="users">
+  <div class="container">
+    <% if(addedSuccessfully){ %>
+    <div class="position-relative alert alert-success text-center fs-5 bold">
+      <%= addedSuccessfully %>
+      <div class="close">X</div>
+    </div>
+    <% } %> <% if(deleteUser){ %>
+    <div
+      class="position-relative alert <% if(deleteStatus){ %> alert-success <% }else{ %> alert-danger <% } %> text-center fs-5 bold"
+    >
+      <%= deleteUser %>
+      <div class="close">X</div>
+    </div>
+    <% } %> <% if(editStatus){ %>
+    <div
+      class="position-relative alert <% if(editUserStates){ %> alert-success <% }else{ %> alert-danger <% } %> text-center fs-5 bold"
+    >
+      <%= editStatus %>
+      <div class="close">X</div>
+    </div>
+    <% } %>
+
+    <div class="user mb-5">
+      <h1 class="mb-3" style="color: white">المسؤلون :</h1>
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Password</th>
+            <th scope="col">Settings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% let admins=Users.filter((e)=>e.type=="admin") %> <% for (let i = 0;
+          i < admins.length; i++) { %> <% let adminImage = admins[i].image ?
+          admins[i].image : 'user-image.png'; %>
+          <tr>
+            <th scope="row"><%= i+1 %></th>
+            <form class="delete-form" method="POST">
+              <td><%= admins[i].username %></td>
+              <td><%= admins[i].type %></td>
+              <td><%= admins[i].password %></td>
+              <td class="d-flex gap-2">
+                <input
+                  type="hidden"
+                  name="username"
+                  value="<%= admins[i].username %>"
+                />
+                <input type="hidden" name="_id" value="<%= admins[i]._id %>" />
+                <a
+                  class="my-btn-"
+                  href="/users/edit/<%= admins[i]._id %>"
+                >
+                  تعديل
+                </a>
+                <input
+                  type="submit"
+                  class="delete"
+                  value="حذف"
+                  formaction="/users/<%= admins[i]._id %>"
+                />
+              </td>
+            </form>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+    <div class="user mb-5">
+      <h1 class="mb-3" style="color: white">الأساتذة :</h1>
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Type</th>
+            <th scope="col">Password</th>
+            <th scope="col">Settings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% let doctors=Users.filter((e)=>e.type=="doctor") %> <% for (let i =
+          0; i < doctors.length; i++) { %> <% let doctorImage = doctors[i].image
+          ? doctors[i].image : 'user-image.png'; %>
+
+          <tr>
+            <th scope="row"><%= i+1 %></th>
+            <form class="delete-form" method="POST">
+              <td><%= doctors[i].username %></td>
+              <td><%= doctors[i].type %></td>
+              <td><%= doctors[i].password %></td>
+              <td class="d-flex gap-2">
+                <input
+                  type="hidden"
+                  name="username"
+                  value="<%= doctors[i].username %>"
+                />
+                <input type="hidden" name="_id" value="<%= doctors[i]._id %>" />
+                <a
+                  class="my-btn-"
+                  href="/users/edit/<%= doctors[i]._id %>"
+                >
+                  تعديل
+                </a>
+                <input
+                  type="submit"
+                  class="delete"
+                  value="حذف"
+                  formaction="/users/<%= doctors[i]._id %>"
+                />
+              </td>
+            </form>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+    <div class="user mb-5">
+      <h1 class="mb-3" style="color: white">الطلاب :</h1>
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Accademic_num</th>
+            <th scope="col">Type</th>
+            <th scope="col">Password</th>
+            <th scope="col">Settings</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% let students=Users.filter((e)=>e.type=="student") %> <% for (let i
+          = 0; i < students.length; i++) { %> <% let studentImage =
+          students[i].image ? students[i].image : 'user-image.png'; %>
+
+          <tr>
+            <th scope="row"><%= i+1 %></th>
+            <form class="delete-form" method="POST">
+              <td><%= students[i].username %></td>
+              <td><%= students[i].accademic %></td>
+              <td><%= students[i].type %></td>
+              <td><%= students[i].password %></td>
+              <td class="d-flex gap-2"> 
+                <input
+                  type="hidden"
+                  name="username"
+                  value="<%= students[i].username %>"
+                />
+                <input
+                  type="hidden"
+                  name="_id"
+                  value="<%= students[i]._id %>"
+                />
+                <a
+                  class="my-btn-"
+                  href="/users/edit/<%= students[i]._id %>"
+                >
+                  تعديل
+                </a>
+                <input
+                  type="submit"
+                  class="delete"
+                  value="حذف"
+                  formaction="/users/<%= students[i]._id %>"
+                />
+              </td>
+            </form>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<%- include('../parts/footer')%>

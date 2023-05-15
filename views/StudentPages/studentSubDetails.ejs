@@ -1,0 +1,52 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%>
+
+
+<div class="student-sub-details mt">
+   <div style="color: white;" class=" container">
+
+      <div class="sub ">
+         <div class="center mb-1">
+            <div class="ms-3">
+               <i style="font-size: 50px;" class="fa-solid fa-file-pen"></i>
+            </div>
+            <span>درجه ( <span class="bold"><%= subName %></span> )</span>
+         </div>
+
+
+
+         <% if( grade && grade.grade && grade.grade!='notAvailable' ){ %>
+            <div class="bold mt-1 text-center"> 100 / <%= grade.grade %>   </div>
+            <% if (grade.status=="ناجح") { %>
+               <div style="color:rgb(0, 212, 0);" class="bold mt-1 text-center"> <%= grade.status  %>   </div>
+            <% }else{ %>
+            <div style="color:red;" class="bold mt-1 text-center"> <%= grade.status  %>   </div>
+            <% } %>
+            <div class="bold mt-1 text-center"> التقييم <%= grade.rate  %>   </div>
+         <% } %>
+         
+         <% if( grade && grade.grade=='notAvailable' ){ %>
+            <div  class="error text-center"> لم تظهر بعد </div>
+         <% } %>
+            
+
+
+         
+         
+         <form action="/studentGrade" method="post">
+            <button  class="A-Btn d-block mx-auto text-light mt-3 "> اظهار النتيجه </button>
+         </form>
+      </div>
+      <div class="sub mt-5 ">
+         <div class="center">
+            <i style="font-size: 50px;"  class="fa-regular fa-file-pdf"></i>
+            <span class="me-3">الملفات</span>
+         </div>
+         <form action="/studentSubMaterial" method="post">
+            <button class="A-Btn text-light mt-4"> اظهار الملفات </button>
+         </form>
+      </div>
+   </div>
+</div>
+
+
+<%- include('../parts/footer')%>

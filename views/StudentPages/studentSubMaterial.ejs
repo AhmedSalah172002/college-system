@@ -1,0 +1,22 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%>
+
+
+
+      <div class="container mt-5 pt-5">
+         <% if(material && material.length){ %> 
+            <% material.map((pdf, index)=>{ %>
+          <div class="center justify-content-between gap-2 mt-2">
+            <a href="/student/<%= pdf %>" target="_blank" class="pdf center justify-content-start ps-2 flex1">
+              <%= index +1 %> - <%= pdf %>
+            </a>
+          </div>
+          <% }) %> <% }else{ %>
+            <div class="alert alert-success" role="alert">
+                  لا يوجد ملفات بعد....
+            </div>
+            <% } %>
+      </div>
+
+
+
+<%- include('../parts/footer')%>

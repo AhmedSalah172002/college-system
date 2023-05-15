@@ -1,0 +1,235 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%>
+
+<% if(students && students.length){ %>
+<div class="students-doctor mt">
+      <div class="container">
+        <table style="background-color: #15033e; color:white;" class="table pt-3">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">الاسم</th>
+              <th scope="col">الاكاديمى</th>
+              <th scope="col">
+                <p>الاسبوع 1</p>
+                ✔ ❌
+              </th>
+              <th scope="col">
+                <p>الاسبوع 2</p>
+                ✔ ❌
+              </th>
+              <th scope="col">
+                <p>الاسبوع 3</p>
+                ✔ ❌
+              </th>
+              <th scope="col">
+                <p>الاسبوع 4</p>
+                ✔ ❌
+              </th>
+              <th scope="col">
+                <p>الاسبوع 5</p>
+                ✔ ❌
+              </th>
+              <th scope="col">
+                <p>الاسبوع 6</p>
+                ✔ ❌
+              </th>
+              <th scope="col">
+                <p>الاسبوع 7</p>
+                ✔ ❌
+              </th>
+              <th scope="col">
+                <form action="/previewAbsence" method="post">
+                  <button class="A-Btn text-light"> معاينه وطباعه </button>
+                </form>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+               <% students.map((student, index) => { %>
+                  <%
+                     let week1 = student.absence[subName].week1 || false;
+                     let week2 = student.absence[subName].week2 || false;
+                     let week3 = student.absence[subName].week3 || false;
+                     let week4 = student.absence[subName].week4 || false;
+                     let week5 = student.absence[subName].week5 || false;
+                     let week6 = student.absence[subName].week6 || false;
+                     let week7 = student.absence[subName].week7 || false;
+                  %>
+                  
+                  <tr>
+                     <th scope="row"> <%= index+1 %> </th>
+                     <td><%= student.name %></td>
+                     <td><%= student.accademic %></td>
+                     <form action="/saveAbsence" method="post">
+                      <input type="hidden" name="studentName" value="<%= student.name %>">
+                      <input type="hidden" name="accademic" value="<%= student.accademic %>">
+                       <td class="">
+                         <div style="height: 60px;" class=" d-flex justify-content-start  align-items-center gap-2">
+                            <input
+                            class="form-check-input"
+                            type="radio"
+                            name="week1"
+                            value="true"
+                            <% if(week1){ %>
+                                checked
+                                <% } %>
+                              />
+                                 <input
+                                 class="form-check-input"
+                                 type="radio"
+                                 name="week1"
+                                 value="false"
+                                 <% if(!week1){ %>
+                                    checked
+                                 <% } %>
+                                  
+                                 />
+                                 
+                         </div>
+                       </td>
+                       <td class="">
+                         <div style="height: 60px;" class=" d-flex justify-content-start  align-items-center gap-2">
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week2"
+                             value="true"
+                             <% if(week2){ %>
+                              checked
+                              <% } %>
+                           />
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week2"
+                             value="false"
+                             <% if(!week2){ %>
+                              checked
+                              <% } %>
+                           />
+                         </div>
+                       </td>
+                       <td class="">
+                         <div style="height: 60px;" class=" d-flex justify-content-start  align-items-center gap-2">
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week3"
+                             value="true"
+                             <% if(week3){ %>
+                              checked
+                              <% } %>
+                           />
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week3"
+                             value="false"
+                             <% if(!week3){ %>
+                              checked
+                              <% } %>
+                           />
+                         </div>
+                       </td>
+                       <td class="">
+                         <div style="height: 60px;" class=" d-flex justify-content-start  align-items-center gap-2">
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week4"
+                             value="true"
+                             <% if(week4){ %>
+                              checked
+                              <% } %>
+                           />
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week4"
+                             value="false"
+                             <% if(!week4){ %>
+                              checked
+                              <% } %>
+                           />
+                         </div>
+                       </td>
+                       <td class="">
+                         <div style="height: 60px;" class=" d-flex justify-content-start  align-items-center gap-2">
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week5"
+                             value="true"
+                             <% if(week5){ %>
+                              checked
+                              <% } %>
+                           />
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week5"
+                             value="false"
+                             <% if(!week5){ %>
+                              checked
+                              <% } %>
+                           />
+                         </div>
+                       </td>
+                       <td class="">
+                         <div style="height: 60px;" class=" d-flex justify-content-start  align-items-center gap-2">
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week6"
+                             value="true"
+                             <% if(week6){ %>
+                              checked
+                              <% } %>
+                           />
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week6"
+                             value="false"
+                             <% if(!week6){ %>
+                              checked
+                              <% } %>
+                           />
+                         </div>
+                       </td>
+                       <td class="">
+                         <div style="height: 60px;" class=" d-flex justify-content-start  align-items-center gap-2">
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week7"
+                             value="true"
+                             <% if(week7){ %>
+                              checked
+                              <% } %>
+                           />
+                           <input
+                             class="form-check-input"
+                             type="radio"
+                             name="week7"
+                             value="false"
+                             <% if(!week7){ %>
+                              checked
+                              <% } %>
+                           />
+                         </div>
+                       </td>
+                       <td class="" > <button class="button-62" role="button">حفظ</button> </td>
+                     </form>
+                   </tr>
+                   <% }) %>
+                  </tbody>
+                </table>
+      </div>
+        </div>
+        <% }else{ %>  
+         <p class="mt fs-5 py-5 alert alert-light text-center bold"> لم يسجل اى من الطلاب هذه الماده </p>
+         <% } %> 
+
+
+<%- include('../parts/footer')%>

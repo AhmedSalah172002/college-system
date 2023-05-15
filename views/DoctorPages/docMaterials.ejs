@@ -1,0 +1,22 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%>
+
+
+<div class="docMaterials  mb-5">
+    <div class="container">
+        <% if(subjects && subjects.length){ %>
+            <% subjects.map((sub)=>{ %>
+                    <a href="/docMaterials/<%= sub.subName %>" class="sub mb-5">
+                        <p><%= sub.subName %></p>
+                        <p><%= sub.deptName %></p>
+                        <p><%= sub.subCode %></p>
+                    </a>
+            <% }) %>
+        <% }else{ %>
+            <div class="alert alert-success" role="alert">
+                  لا يوجد مواد متاحه اك الأن ....
+            </div>
+            <% } %>
+    </div>
+</div>
+
+<%- include('../parts/footer')%>

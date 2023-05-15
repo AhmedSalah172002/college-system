@@ -1,0 +1,57 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%>
+
+<div class="sub-doc-info mt">
+  <div class="container">
+    <div style="color: white;">
+      <div
+        
+        class="sub mb-5"
+      >
+        <div class="center gap-2 mb-2">
+          <i class="fa-solid fa-file-pdf"></i>
+          <span class="fs-5 bold"> اضافه ملف </span>
+        </div>
+        <form class="center flex-column" action="/subMaterial" method="get">
+          <button style="width: fit-content" class="A-Btn text-light">
+            انتقل
+          </button>
+        </form>
+      </div>
+
+      <div
+      
+        class="sub mb-5"
+      >
+        <div class="center gap-2 mb-2">
+          <i class="fa-solid fa-users"></i>
+          <span style="width: max-content" class="fs-5 bold">
+            اسماء الطلاب والغياب
+          </span>
+        </div>
+        <form action="/studentAndAbsence" method="post">
+          <input type="hidden" name="subName" value="<%= subName %>" />
+          <button style="width: fit-content" class="A-Btn text-light">
+            انتقل
+          </button>
+        </form>
+      </div>
+
+      <div
+      
+        class="sub mb-5"
+      >
+        <div class="center gap-2 mb-2">
+          <i class="fa-solid fa-shuffle"></i>
+          <span class="fs-5 bold"> رصد الدرجات </span>
+        </div>
+        <form action="/studentsGrades" method="post">
+          <button style="width: fit-content" class="A-Btn text-light">
+            انتقل
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../parts/footer')%>

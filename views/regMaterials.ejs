@@ -1,0 +1,46 @@
+<%- include('parts/head')%> <%- include('parts/navbar')%>
+
+
+<div class="regMaterials  mb-5">
+    <div class="container">
+        <% if (student.length!=0) { %>
+            <div class="alert alert-success" role="alert">
+                لقد قمت بتسجيل المواد بنجاح وأصبحت هذه الصفحة غير متاحة لك الأن نتمني لك دوام التفوق فيما هو قادم
+              </div>
+              <script type="text/javascript">
+                $(document).ready(function () {
+                  
+                    Swal.fire(
+                        'لقد قمت بتسجيل المواد بنجاح',
+                        'هذه الصفحة لن تكون متاحه لك الأن',
+                        'success'
+                        )
+                  
+                })
+              </script>
+        <% }else{ %>
+            <select  class="login__input student-sub mt-5 mb-5" >
+                <option disabled   selected>اختر المادة المناسبة</option>
+                
+                <% let newSub= subjects.filter((item)=>  prevSub.includes(item.subPrev)&&(!prevSub.includes(item.subName)) )%>
+                <% newSub.map((item)=>{ %>
+                    <option  value="<%= item.subName %>"><%= item.subName %></option>
+                <% }) %>
+            </select>
+            <div class="accademic-time">
+                <h3 style="color: white;">عدد الساعات المسجلة : <span style="color: rgb(92, 146, 255);">0</span></h3>
+              </div>
+              <form class="mt-5" action="/regMaterials" method="post">
+                <div class="form"></div>
+                
+                <input type="hidden" name="name" value="<%= name %>">
+                <input type="hidden" name="accademic" value="<%= accademic %>">
+                <input type="hidden" name="prevSub" value="<%= prevSub %>">
+                <input class="currSub" type="hidden" name="currSub" >
+                <input type="submit" value="اضافة" class="registration" />
+              </form>
+           <% } %>
+    </div>
+</div>
+
+<%- include('parts/footer')%>

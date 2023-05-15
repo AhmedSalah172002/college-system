@@ -1,0 +1,53 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%>
+
+<% 
+  let notValid = 'not-valid'
+%>
+
+<div class="container">
+  <div class="sub-material mt pt-3">
+    <form
+      class="d-flex justify-content-start align-items-start gap-2"
+      action="/subMaterial/add"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <div class="flex1"> 
+        <label for="input" style="cursor: pointer;" class="form-control <% if(validationErr){ %> <%= notValid %> <% } %>"> <i class="fa-solid fa-file-pdf "></i>  اختر ملف </label>
+        <input class="form-control d-none" type="file" name="material" id="input" />
+        <% if(validationErr){ %>
+          <div class="invalid-feedback d-flex ">
+            <%= validationErr.msg %>
+          </div> 
+        <% } %>
+      </div>
+
+      <button class="A-Btn text-light fs-5 d-flex gap-1"> <i class="fa-solid fa-file-circle-plus"></i> <span> اضافه</span> </button>
+    </form>
+    
+    <% if(addPdfError){ %>
+        <div class="alert alert-danger text-center mt-2"> <%= addPdfError %> </div>
+      <% } %>
+  </div>
+
+
+
+  <div class="pdfs mt-3">
+    <% if(material && material.length){ %> 
+      <% material.map((pdf, index)=>{ %>
+    <div class="center justify-content-between gap-2 mt-2">
+
+      <a href="/file/<%= pdf %>" target="_blank" class="pdf center justify-content-start ps-2 flex1">
+        <%= index +1 %> - <%= pdf %>
+      </a>
+      <form action="/subMaterial/delete" method="post">
+         <input type="hidden" name="filename" value="<%= pdf %>">
+        <button class="A-Btn bg-danger text-light">ازاله</button>
+      </form>
+    </div>
+    <% }) %> <% } %>
+  </div>
+</div>
+
+
+<%- include('../parts/footer')%>

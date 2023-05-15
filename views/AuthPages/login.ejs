@@ -1,0 +1,72 @@
+<%- include('../parts/head')%>
+
+<!-- start handle error -->
+
+<%
+let usernameErr, passwordErr, notValid = 'not-valid';
+ if(validationErrs && validationErrs.length){ 
+  usernameErr = validationErrs.find(err => err.param =='username');
+  passwordErr = validationErrs.find(err => err.param =='password');
+}; %>
+
+<!-- end handle error -->
+
+<div class="login-container">
+  
+  <% if(authErr){%>
+    <script type="text/javascript">
+      
+      $(document).ready(function () {
+        Swal.fire({
+        icon: 'error',
+        title: 'خطأ....',
+        text: '<%= authErr %>',
+        
+        });
+    })
+    </script>
+    <% }; %>
+
+
+  <form method="post" action="/login" class="form-login">
+    <ul class="login-nav">
+      <li class="login-nav__item">
+        <h1>تسجيل الدخول</h1>
+      </li>
+    </ul>
+    <label class="login__label" for="name">اسم المستخدم :</label>
+    <input
+      class="login__input <% if(usernameErr){ %> <%= notValid %> <% } %> "
+      type="text"
+      name="username"
+      id="name"
+      placeholder="ادخل الاسم"
+    />
+    <% if(usernameErr){ %>
+      <div class="invalid-feedback d-flex">
+        <%= usernameErr.msg %>
+      </div> 
+    <% } %>
+
+    <label class="login__label" for="exampleInputPassword1">كلمة السر</label>
+    <input
+      type="password"
+      name="password"
+      class="login__input <% if(passwordErr){ %> <%= notValid %> <% } %> "
+      id="exampleInputPassword1"
+      placeholder="ادخل كلمة السر"
+    />
+    <% if(passwordErr){ %>
+      <div class="invalid-feedback d-flex">
+        <%= passwordErr.msg %>
+      </div> 
+    <% } %>
+
+    <button type="submit" class="btn btn-primary">تسجيل الدخول</button>
+  </form>
+
+  
+
+</div>
+
+<%- include('../parts/footer')%>

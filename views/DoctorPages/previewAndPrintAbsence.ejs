@@ -1,0 +1,127 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%>
+
+<% if(students && students.length){ %>
+<div class="students-doctor mt">
+   <div class="container">
+      <table style="background-color: #15033e; color:white;" class="table pt-3">
+         <thead>
+           <tr>
+             <th scope="col">#</th>
+             <th scope="col">الاسم</th>
+             <th scope="col">الاكاديمى</th>
+             <th scope="col">
+               <span>الاسبوع 1</span>
+               
+             </th>
+             <th scope="col">
+               <span>الاسبوع 2</span>
+               
+             </th>
+             <th scope="col">
+               <span>الاسبوع 3</span>
+               
+             </th>
+             <th scope="col">
+               <span>الاسبوع 4</span>
+               
+             </th>
+             <th scope="col">
+               <span>الاسبوع 5</span>
+               
+             </th>
+             <th scope="col">
+               <span>الاسبوع 6</span>
+               
+             </th>
+             <th scope="col">
+               <span>الاسبوع 7</span>
+               
+             </th>
+             <th scope="col">
+                 <button class="print-btn A-Btn text-light"> طباعه </button>
+             </th>
+           </tr>
+         </thead>
+         <tbody>
+              <% students.map((student, index) => { %>
+                 
+                 <%
+                    let week1 = student.absence[subName].week1 || false;
+                    let week2 = student.absence[subName].week2 || false;
+                    let week3 = student.absence[subName].week3 || false;
+                    let week4 = student.absence[subName].week4 || false;
+                    let week5 = student.absence[subName].week5 || false;
+                    let week6 = student.absence[subName].week6 || false;
+                    let week7 = student.absence[subName].week7 || false;
+                 %>
+                 
+                 <tr>
+                    <th scope="row"> <%= index+1 %> </th>
+                    <td><%= student.name %></td>
+                    <td><%= student.accademic %></td>
+                    <td>
+                       <% if(week1){ %>
+                          ✔ 
+                       <% } %>
+                       <% if(!week1){ %>
+                          ❌
+                       <% } %>
+                    </td>
+                    <td>
+                       <% if(week2){ %>
+                          ✔ 
+                       <% } %>
+                       <% if(!week2){ %>
+                          ❌
+                       <% } %>
+                    </td>
+                    <td>
+                       <% if(week3){ %>
+                          ✔ 
+                       <% } %>
+                       <% if(!week3){ %>
+                          ❌
+                       <% } %>
+                    </td>
+                    <td>
+                       <% if(week4){ %>
+                          ✔ 
+                       <% } %>
+                       <% if(!week4){ %>
+                          ❌
+                       <% } %>
+                    </td>
+                    <td>
+                       <% if(week5){ %>
+                          ✔ 
+                       <% } %>
+                       <% if(!week5){ %>
+                          ❌
+                       <% } %>
+                    </td>
+                    <td>
+                       <% if(week6){ %>
+                          ✔ 
+                       <% } %>
+                       <% if(!week6){ %>
+                          ❌
+                       <% } %>
+                    </td>
+                    <td>
+                       <% if(week7){ %>
+                          ✔ 
+                       <% } %>
+                       <% if(!week7){ %>
+                          ❌
+                       <% } %>
+                    </td>
+                  </tr>
+                  <% }) %>
+                 </tbody>
+              </table>
+   </div>
+      </div>
+      <% } %>  
+
+
+<%- include('../parts/footer')%>

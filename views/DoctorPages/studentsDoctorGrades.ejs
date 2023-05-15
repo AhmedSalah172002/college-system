@@ -1,0 +1,52 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%>
+
+
+<% if(students && students.length){ %>
+<div class="students-doctor mt">
+  <table class="table bg-light pt-3">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">الاسم</th>
+        <th scope="col">الاكاديمى</th>
+        <th scope="col">الدرجه</th>
+        <th scope="col">
+          <form action="/previewGrades" method="post">
+            <button class="A-Btn text-light"> معاينه وطباعه </button>
+          </form>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+         <% students.map((student, index) => { %>
+          <% 
+            const grade = student.grades[subName].grade || 0;
+          %>
+            <tr>
+               <th scope="row"> <%= index+1 %> </th>
+               <td><%= student.name %></td>
+               <td><%= student.accademic %></td>
+               <form action="/setGrade" method="post">
+                  <input type="hidden" name="studentName" value="<%= student.name %>">
+                  <input type="hidden" name="accademic" value="<%= student.accademic %>">
+                  <td>
+                     <input class="form-control" type="number" name="grade" max="100" min="0" required value="<%= grade %>" >
+                  </td>
+
+                  <td class="center" ><button class="button-62" role="button">حفظ</button></td>
+               </form>
+             </tr>
+             <% }) %>
+            </tbody>
+          </table>
+        </div>
+        <% }else{ %>  
+         <p class="mt py-5 fs-5 alert alert-light text-center bold" >لم يسجل اى من الطلاب هذه الماده</p>
+         <% } %>  
+
+
+
+<%- include('../parts/footer')%>
+
+
+

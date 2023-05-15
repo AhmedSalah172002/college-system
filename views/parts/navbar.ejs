@@ -1,0 +1,92 @@
+<nav class="navbar mb-5 navbar-expand-lg navbar-dark fixed-top ">
+  <div class="container">
+    <a class="navbar-brand" href="/"><i class="fa-solid fa-house"></i> الصفحة الرئيسية  </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto ">
+        <% if (type=="admin") { %>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/departments"> <i class="fa-solid fa-plus"></i> اضافة قسم </i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/materials"> <i class="fa-solid fa-plus"></i> اضافة مادة دراسية </i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/signup"> <i class="fa-solid fa-user-pen"></i> انشاء حساب</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/users"> <i class="fa-solid fa-users"></i> المستخدمون</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/getDepartments"> <i class="fa-solid fa-graduation-cap"></i> الأقسام</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/getMaterials"> <i class="fa-solid fa-book"></i> المواد الدراسية</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/adminAbsence"> <i class="fa-solid fa-file-csv"></i> كشوفات الغياب</a>
+          </li>
+        <% }else if(type=="doctor"){ %>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/docMaterials"> <i class="fa-solid fa-chalkboard-user"></i> المواد الدراسية</a>
+          </li>
+          <% }else if(type=="student"){ %>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/studentMaterials"> <i class="fa-solid fa-chalkboard-user"></i> المواد الدراسية</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/regMaterials"> <i class="fa-solid fa-file-pen"></i> تسجيل المواد الدراسية </a>
+            </li>
+            <% } %>
+        <li class="nav-item">
+          <a style="background-color: #FFE53B !important;
+          background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%) !important;
+          border-radius: 10px;"  class="nav-link delete logout" aria-current="page" href="/logout" >  تسجيل الخروج  <i class="fa-solid fa-right-from-bracket"></i> </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- end nav -->
+<!-- start setting -->
+<% if(type){ %>
+  <div class="setting ">
+      <div class="d-flex">
+        <div class="gear">
+          <i class="fa-solid fa-gear"></i>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="close-sidebar">
+          X
+        </div>
+        <div class="profile center gap-2 flex-column">
+          <div class="image">
+            <img style="width: 75px; height: 75px; object-fit: cover; border-radius: 50%;" src="/userImages/<%= image %>" alt="ProfilePic">
+          </div>
+          <div class="username text-capitalize"> <%= name %> </div>
+          <% if(type=='student'){ %>
+            <div class="username"> <%= accademic %> </div>
+          <% } %>
+          <a href="/user/changePassword" > تغير كلمه المرور </a>
+          <form class="center flex-column gap-2 mt-1 w-100" action="/user/changeImage" method="post" enctype="multipart/form-data">
+            <label  style="text-decoration: underline; cursor: pointer;" for="image" > <i class="fa-solid fa-upload"></i> اضغط لاختيار صوره </label>
+            <input class="d-none" type="file" name="image" id="image" />
+            <button class="my-btn m-0 my-btn-submit"><i class="fa-solid fa-rotate"></i> تغيير </button>
+          </form>
+          <form class="center flex-column gap-2 mt-1 w-100" action="/user/deleteImage" method="post">
+            <input type="hidden" name="defaultImage" value="user-image.jpg">
+            <button class="my-btn m-0 my-btn-delete"> <i class="fa-solid fa-trash"></i> حذف الصوره  </button>
+          </form>
+        </div>
+      </div>
+  </div>
+<% } %>
+
+
+<!-- end setting -->

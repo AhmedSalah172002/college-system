@@ -1,0 +1,9 @@
+<%- include('../parts/head')%> <%- include('../parts/navbar')%>
+
+<div class="center mt-5">   
+   <% if(pdfName){ %>
+      <embed src="/files/<%= pdfName %>" width="100%" style="min-height: 100vh;" type="">
+   <% } %>
+</div>
+      
+      <%- include('../parts/footer')%>
