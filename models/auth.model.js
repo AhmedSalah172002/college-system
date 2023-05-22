@@ -165,14 +165,7 @@ exports.editUser = (data) => {
     mongoose
       .connect(db_url)
       .then(() => {
-        return User.findOne({ username: data.data.username });
-      })
-      .then((items) => {
-        if (!items) {
-          return User.findByIdAndUpdate(data.id, data.data);
-        }else{
-          reject()
-        }
+        return User.findByIdAndUpdate(data.id, data.data);
       })
       .then(() => {
         mongoose.disconnect();

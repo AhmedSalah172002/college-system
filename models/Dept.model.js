@@ -67,27 +67,14 @@ exports.deleteItem = (id) => {
   });
 };
 
-// data{
-//   id:sdfasdfasf,
-//   ahmed{
-//     deptname:dfasd,
-//     deptcode:dasfasd
-//   }
-// }
+
 
 exports.editItem = (data) => {
   return new Promise((resolve, reject) => {
     mongoose
       .connect(DB_URL)
       .then(() => {
-        return DepartmentItem.findOne({ deptName: data.data.deptName });
-      })
-      .then((items) => {
-        if (!items) {
-          return DepartmentItem.findByIdAndUpdate(data.id, data.data);
-        }else{
-          reject()
-        }
+        return DepartmentItem.findByIdAndUpdate(data.id, data.data);
       })
       .then(() => {
         mongoose.disconnect();

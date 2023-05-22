@@ -96,14 +96,7 @@ exports.editItem = (data) => {
     mongoose
       .connect(DB_URL)
       .then(() => {
-        return SubjectItem.findOne({ subName: data.data.subName });
-      })
-      .then((items) => {
-        if (!items) {
-          return SubjectItem.findByIdAndUpdate(data.id, data.data);
-        }else{
-          reject()
-        }
+        return SubjectItem.findByIdAndUpdate(data.id, data.data);
       })
       .then(() => {
         mongoose.disconnect();
