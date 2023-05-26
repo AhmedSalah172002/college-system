@@ -7,7 +7,7 @@
          <h1 class="mt-5 text-center" style="color: white;">لا يوجد مواد تم تسجيلها بعد ...</h1>
         <% }else{ %>
         <% Student[0].currSub.split(",").map((e)=>{%>
-            <a target="_blank" href="/studentMaterials/<%= e %>" class="sub mb-5">
+            <a  href="/studentMaterials/<%= e %>" class="sub mb-5">
                 <p><%= e %></p>
                 <p><%= Student[0].name %></p>
             </a>

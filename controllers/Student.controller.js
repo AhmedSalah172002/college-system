@@ -26,10 +26,10 @@ exports.getStudents = (req, res, next) => {
       XLSX.utils.book_append_sheet(wb, ws, "Responses");
       XLSX.writeFile(wb, `${sub}.xlsx`);
 
-      let myPath = __dirname.split("software-Project")[0] + "software-Project";
+      let myPath = path.join(__dirname,"..")
       fs.cp(
         path.join(myPath, `${sub}.xlsx`),
-        path.join(myPath, "assets", "adminAbsenceFiles", `${sub}.xlsx`),
+        path.join(myPath, 'assets\\adminAbsenceFiles' , `${sub}.xlsx`),
         (err) => {
           if (err) console.log(err);
         }
